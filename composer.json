@@ -1,0 +1,24 @@
+{
+    "name": "grace/pack",
+    "description": "dev",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shampeak",
+            "email": "shampeak@sina.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php" : ">=5.5"
+    },
+    "require_dev": {
+        "phpunit/phpunit": "4.8.27"
+    },
+    "autoload":{
+        "psr-4":{
+            "Grace\\": "src"
+        }
+    }
+}
