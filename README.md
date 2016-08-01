@@ -45,5 +45,5 @@ GracePHP由shampeak研发小组独立研发
 
 ## 协议
 
-本框架支持MIT开源协议,更多信息请参考[License File](https://github.com/shampeak/GracePHP/blob/master/LICENSE.md).
+本框架支持MIT开源协议,更多信息请参考[License File](https://github.com/shampeak/GraceServer/blob/master/LICENSE.md).
 
