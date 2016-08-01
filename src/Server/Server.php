@@ -30,7 +30,7 @@ class Server
     {
         if(!empty($Baseroot)){
             $this->Baseroot = $Baseroot?:__DIR__.'/Config/';
-            $_ObjectConfig    = $this->load( $this->Baseroot.'/Server.php');           //对象映射
+            $_ObjectConfig    = $this->load( $this->Baseroot.'Server.php');           //对象映射
             $this->FileReflect      = $_ObjectConfig['FileReflect'];         //配置文件映射
             $this->Providers        = $_ObjectConfig['Providers'];           //对象映射
 
@@ -54,7 +54,7 @@ class Server
     private function __construct($Baseroot){
         if(!empty($Baseroot)){
             $this->Baseroot = $Baseroot?:__DIR__.'/Config/';
-            $_ObjectConfig    = $this->load( $this->Baseroot.'/Server.php');           //对象映射
+            $_ObjectConfig    = $this->load($this->Baseroot.'Server.php');           //对象映射
             $this->FileReflect      = $_ObjectConfig['FileReflect'];         //配置文件映射
             $this->Providers        = $_ObjectConfig['Providers'];           //对象映射
 
