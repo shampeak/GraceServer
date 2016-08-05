@@ -136,4 +136,60 @@ class Server
         return [];
     }
 
+    public function Help()
+    {
+        header("Content-type: text/html; charset=utf-8");
+        $oblist = print_r($this->obList(),true);
+        $obConfig = print_r($this->ObjectConfig,true);
+        $env = print_r($this->Config('Config')['Env'],true);
+
+        echo "<pre>
+Server Object 简单说明
+
+1 : 创建对象实例
+\$server = Grace\Server\Server::getInstance('../Config/');
+or
+\$server = Grace\Server\Server::getInstance()->ConfigRoot('../Docs/Config/');
+
+2 : 返回配置信息    在Config中定义过的
+\$server = Grace\Server\Server::getInstance()->Config('Db');
+\$server = Grace\Server\Server::getInstance()->Config('Config');
+\$server = Grace\Server\Server::getInstance()->Config('Application');
+var_dump(\$server);
+exit;
+
+3 : 封装
+function server(\$make = null, \$parameters = [])
+{
+    if (is_null(\$make))     return \Grace\Server\Server::getInstance('../Config/');
+    return \Grace\Server\Server::getInstance('../Config/')->make(\$make,\$parameters);
+}
+
+4 : 使用
+\$server = Grace\Server\Server::getInstance()->ConfigRoot('../Config/')->meke('db');
+or
+server('db');
+
+===================================================
+//系统内参数
+
+\$this->Baseroot :
+{$this->Baseroot}
+
+\$this->obList :
+$oblist
+
+\$this->ObjectConfig :
+$obConfig
+
+//获取某个定义的参数
+server('db')->Config('Config')['Env'];
+{$env};
+
+
+
+</pre>";
+        //echo 'Hello Server';
+    }
+
 }

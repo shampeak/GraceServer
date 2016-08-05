@@ -77,8 +77,8 @@ class View {
                   $this->_data[$key] = $value;
             }
 
-            $Controller = $this->router['Controller']?:'Home';
-            $Mothed     = $this->router['Mothed']?:"Index";
+            $Controller = $this->router['controller']?:'Home';
+            $Mothed     = $this->router['mothed']?:"Index";
 
             $tplFile = $tplFile?ucfirst($tplFile):ucfirst($Mothed);
             $this->_viewPath = $this->_tplDir .ucfirst($Controller).'/'. $tplFile . '.php';
@@ -105,8 +105,8 @@ class View {
                   $this->_data[$key] = $value;
             }
 
-            $Controller = $this->router['Controller']?:'Home';
-            $Mothed     = $this->router['Mothed']?:"Index";
+            $Controller = $this->router['controller']?:'Home';
+            $Mothed     = $this->router['mothed']?:"Index";
 
             $tplFile = $tplFile?ucfirst($tplFile):ucfirst($Mothed);
             $this->_viewPath = $this->_tplDir .ucfirst($Controller).'/'. $tplFile . '.php';

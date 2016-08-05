@@ -45,9 +45,9 @@ class Smarty
          * 'Mothed'    => 'Mothed',
          * 'Params'    => 'Params',
          */
-        $this->_controller =  $Router['Controller']?ucfirst($Router['Controller']):'Home';
-        $this->_mothed     =  $Router['Mothed']?ucfirst($Router['Mothed']):'Index';
-        $this->_params     =  $Router['Params']?ucfirst($Router['Params']):'';
+        $this->_controller =  $Router['controller']?ucfirst($Router['controller']):'Home';
+        $this->_mothed     =  $Router['mothed']?ucfirst($Router['mothed']):'Index';
+        $this->_params     =  $Router['params']?ucfirst($Router['params']):'';
         return $this;
     }
 
