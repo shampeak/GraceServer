@@ -4,21 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69de6b3bbaff9798027eaeb9bcdd7c20",
-    "content-hash": "295c6abd2866845021abd505c40a39cb",
+    "hash": "c3039a1b0d6bb56714ec262f03011e96",
+    "content-hash": "d44ee0a8f9c3cfd7c3b7a4520c552041",
     "packages": [
         {
-            "name": "smarty/smarty",
-            "version": "dev-master",
+            "name": "erusev/parsedown",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "f74a0d575a99bc9b0e307c2698a3756c2ac9fab1"
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/f74a0d575a99bc9b0e307c2698a3756c2ac9fab1",
-                "reference": "f74a0d575a99bc9b0e307c2698a3756c2ac9fab1",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2015-10-04 16:44:32"
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v3.1.30",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "ed2b7f1146cfda13df1eea8a5f707a1b771b6e7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/ed2b7f1146cfda13df1eea8a5f707a1b771b6e7e",
+                "reference": "ed2b7f1146cfda13df1eea8a5f707a1b771b6e7e",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +99,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-07-24 18:31:27"
+            "time": "2016-08-07 18:46:49"
         }
     ],
     "packages-dev": [
@@ -1075,12 +1114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "cd3288cd749886aa1ff43038f17db6494e883262"
+                "reference": "9255a2ecb9e702ca5d1f9c3df7f9506d57910a9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/cd3288cd749886aa1ff43038f17db6494e883262",
-                "reference": "cd3288cd749886aa1ff43038f17db6494e883262",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/9255a2ecb9e702ca5d1f9c3df7f9506d57910a9c",
+                "reference": "9255a2ecb9e702ca5d1f9c3df7f9506d57910a9c",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1161,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 14:08:33"
+            "time": "2016-08-07 15:19:41"
         },
         {
             "name": "webmozart/assert",
