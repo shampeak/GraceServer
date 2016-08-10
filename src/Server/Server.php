@@ -117,7 +117,7 @@ class Server
      * 实例化
      * @return mixed
      */
-    private function build($abstract, array $parameters = [])
+    private function build($abstract, $parameters = [])
     {
         $obj_ = $this->Providers[$abstract];
         $obj = new $obj_($parameters);
