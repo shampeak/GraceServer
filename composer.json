@@ -13,6 +13,7 @@
     "require": {
         "php" : ">=5.5",
         "erusev/parsedown": "^1.6",
+        "desarrolla2/cache":  "~2.0",
         "smarty/smarty": "v3.1.30"
     },
     "require-dev": {
