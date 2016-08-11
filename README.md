@@ -26,6 +26,14 @@ OR
 - Grace/Db
 - Grace/Req
 - Grace/Wise
+- Grace/Cache
+
+## depends
+
+    "erusev/parsedown": "^1.6",     //markdown解析
+    "desarrolla2/cache":  "~2.0",   //缓存
+    "smarty/smarty": "v3.1.30"      //smarty
+    "monolog/monolog": "^1.21",     //
 
 请阅读文档 [文档](https://github.com/shampeak/GraceServer/tree/master/docs)
 
