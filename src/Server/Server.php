@@ -136,7 +136,7 @@ class Server
         return [];
     }
 
-    public function Help()
+    public function Help2()
     {
         header("Content-type: text/html; charset=utf-8");
         $oblist = print_r($this->obList(),true);
@@ -191,5 +191,77 @@ server('db')->Config('Config')['Env'];
 </pre>";
         //echo 'Hello Server';
     }
+
+    //=============================================
+    //Property Overloading
+    //=============================================
+
+    //脚手架
+    public function test()
+    {
+        //do something
+    }
+
+    private function objectList()
+    {
+        return [
+            'Server',
+            'Cache',
+            'Cookies',
+            'Db',
+            'Parsedown',
+            'Req',
+            'Smarty',
+            'View',
+            'Xls',
+        ];
+    }
+
+    //页面
+    public function help()
+    {
+        //获取显示模板
+        $tpl = \Grace\Base\Help::getplframe();
+
+        //oblist
+        $objectList = $this->objectList();
+
+        $chr = $title = $_GET['chr'];
+
+        //计算左侧菜单
+        //<li  class="active"><a href="/index.php?book=01-grace&lm=controller&ar=controller.md"> Controller </a></li>
+        $nav = '';
+        foreach($objectList as $value){
+            if($value == $chr){
+                $nav .= "<li  class=\"active\"><a href=\"?chr=$value\"> $value </a></li>";
+            }else{
+                $nav .= "<li><a href=\"?chr=$value\"> $value </a></li>";
+            }
+        }
+
+        $nr = '';
+        if(in_array($chr,$objectList)){
+            $ob = \Grace\Server\Server::getInstance()->make($chr);
+            var_dump($ob);
+            $nr  = $ob->helpnr();
+        }
+
+        $html = str_replace('##nav##',$nav,$tpl);
+        $html = str_replace('##nr##',$nr,$html);
+        $html = str_replace('##title##',$title,$html);
+        echo $html;
+        exit;
+    }
+
+
+
+    //内容
+    public function helpnr()
+    {
+        return (new \Parsedown())->text(file_get_contents(__DIR__."/readme.md"));
+    }
+
+
+
 
 }

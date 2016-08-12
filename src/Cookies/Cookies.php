@@ -250,4 +250,32 @@ class Cookies{ // class start
                   return $keyc.str_replace('=', '', base64_encode($result));
             }
       }
+
+      //脚手架
+      public function test()
+      {
+            //do something
+      }
+
+      //页面
+      public function help()
+      {
+            //获取显示模板
+            $tpl = \Grace\Base\Help::getpl();
+
+            //获取内容解析
+            $nr = $this->helpnr();
+            $html = str_replace('##nr##',$nr,$tpl);
+            echo $html;
+            exit;
+      }
+
+      //内容
+      public function helpnr()
+      {
+            return (new \Parsedown())->text(file_get_contents(__DIR__."/readme.md"));
+      }
+
+
+
 } // class end

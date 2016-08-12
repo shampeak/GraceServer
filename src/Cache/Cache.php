@@ -6,16 +6,19 @@ namespace Grace\Cache;
 
 class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
 
-    private $_cache = null;     //缓存实例
-    private $_adapter = null;     //$adapter
+    private $_instance = null;     //缓存实例
+    private $_adapte = null;     //$adapter
 
     public function __construct($config = array()){
         $this->_Config = $config;
 
         $this->_adapte = new $config['adapter']($config['cacheDir']);
         $this->_adapte->setOption('ttl', $config['ttl']);
-        $this->_cache = new \Desarrolla2\Cache\Cache($this->_adapte);
+        $this->_instance = new \Desarrolla2\Cache\Cache($this->_adapte);
     }
+
+
+
 
     /**
      * Delete a value from the cache
@@ -23,7 +26,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param string $key
      */
     public function delete($key){
-        return $this->_cache->delete($key);
+        return $this->_instance->delete($key);
     }
 
     /**
@@ -32,7 +35,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param string $key
      */
     public function get($key){
-        return $this->_cache->get($key);
+        return $this->_instance->get($key);
     }
 
     /**
@@ -41,7 +44,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @throws Exception
      */
     public function getAdapter(){
-        return $this->_cache->getAdapter();
+        return $this->_instance->getAdapter();
 
     }
 
@@ -51,7 +54,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param string $key
      */
     public function has($key){
-        return $this->_cache->has($key);
+        return $this->_instance->has($key);
     }
 
     /**
@@ -62,7 +65,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param int    $ttl
      */
     public function set($key, $value, $ttl = null){
-        return $this->_cache->set($key, $value, $ttl);
+        return $this->_instance->set($key, $value, $ttl);
     }
 
     /**
@@ -71,7 +74,7 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param \Desarrolla2\Cache\Adapter\AdapterInterface $adapter
      */
     public function setAdapter(\Desarrolla2\Cache\Adapter\AdapterInterface $adapter){
-        return $this->_cache->setAdapter($adapter);
+        return $this->_instance->setAdapter($adapter);
     }
 
     /**
@@ -81,21 +84,61 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param string $value
      */
     public function setOption($key, $value){
-        return $this->_cache->setOption($key, $value);
+        return $this->_instance->setOption($key, $value);
     }
 
     /**
      * clean all expired records from cache
      */
     public function clearCache(){
-        return $this->_cache->clearCache();
+        return $this->_instance->clearCache();
     }
 
     /**
      * clear all cache
      */
     public function dropCache(){
-        return $this->_cache->dropCache();
+        return $this->_instance->dropCache();
     }
+
+    //=============================================
+    //Property Overloading
+    //=============================================
+
+    public function __get($key)
+    {
+        return $this->_instance->$key;
+    }
+
+    public function __set($key, $value)
+    {
+        return $this->_instance->$key = $value;
+    }
+
+    //脚手架
+    public function test()
+    {
+        //do something
+    }
+
+    //页面
+    public function help()
+    {
+        //获取显示模板
+        $tpl = \Grace\Base\Help::getpl();
+
+        //获取内容解析
+        $nr = $this->helpnr();
+        $html = str_replace('##nr##',$nr,$tpl);
+        echo $html;
+        exit;
+    }
+
+    //内容
+    public function helpnr()
+    {
+        return (new \Parsedown())->text(file_get_contents(__DIR__."/readme.md"));
+    }
+
 
 } // class end
