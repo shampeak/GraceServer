@@ -241,9 +241,13 @@ server('db')->Config('Config')['Env'];
 
         $nr = '';
         if(in_array($chr,$objectList)){
-            $ob = \Grace\Server\Server::getInstance()->make($chr);
-            var_dump($ob);
-            $nr  = $ob->helpnr();
+            if($chr != 'Server'){
+                $ob = \Grace\Server\Server::getInstance()->make($chr);
+                //var_dump($ob);
+                $nr  = $ob->helpnr();
+            }else{
+                $nr  = $this->helpnr();
+            }
         }
 
         $html = str_replace('##nav##',$nav,$tpl);

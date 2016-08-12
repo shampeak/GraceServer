@@ -1,4 +1,4 @@
-## Grace\Cache
+## Grace\view
 > 设置和读取缓存
 
 ### 依赖

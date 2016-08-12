@@ -7,14 +7,14 @@ namespace Grace\Cache;
 class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
 
     private $_instance = null;     //缓存实例
-    private $_adapte = null;     //$adapter
+    private $_adapter = null;     //$adapter
 
     public function __construct($config = array()){
-        $this->_Config = $config;
 
-        $this->_adapte = new $config['adapter']($config['cacheDir']);
-        $this->_adapte->setOption('ttl', $config['ttl']);
-        $this->_instance = new \Desarrolla2\Cache\Cache($this->_adapte);
+        $this->_Config = $config;
+        $this->_adapter = new $config['adapter']($config['cacheDir']);
+        $this->_adapter->setOption('ttl', $config['ttl']);
+        $this->_instance = new \Desarrolla2\Cache\Cache($this->_adapter);
     }
 
 
@@ -108,11 +108,6 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
     public function __get($key)
     {
         return $this->_instance->$key;
-    }
-
-    public function __set($key, $value)
-    {
-        return $this->_instance->$key = $value;
     }
 
     //脚手架
