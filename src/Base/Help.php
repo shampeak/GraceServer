@@ -14,4 +14,10 @@ class Help{
             return $tpl;
       }
 
+    public static function getpldepend()
+    {
+        $tpl = file_get_contents(__DIR__.'/depend.tpl');
+        return $tpl;
+    }
+
 }
