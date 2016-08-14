@@ -32,13 +32,13 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
                 </tr>
                 <tr>
                     <td>Level2</td>
-                    <td>##Level2##</td>
                     <td></td>
+                    <td>##Level2##</td>
                 </tr>
                 <tr>
                     <td>Level50</td>
-                    <td>##Level50##</td>
                     <td></td>
+                    <td>##Level50##</td>
                 </tr>
                 <tr>
                     <td>Level99</td>
