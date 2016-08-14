@@ -26,27 +26,23 @@ class Server
     public $Instances       = array();             //服务对象存储 实例
     private $Baseroot = '';
 
-    public function ConfigRoot($Baseroot)
-    {
-        if(!empty($Baseroot)){
-            $this->Baseroot = $Baseroot?:__DIR__.'/Config/';
-            $_ObjectConfig    = $this->load( $this->Baseroot.'Server.php');           //对象映射
-            $this->FileReflect      = $_ObjectConfig['FileReflect'];         //配置文件映射
-            $this->Providers        = $_ObjectConfig['Providers'];           //对象映射
+//    public function ConfigRoot($Baseroot)
+//    {
+//        if(!empty($Baseroot)){
+//            $this->Baseroot = $Baseroot?:__DIR__.'/Config/';
+//            $_ObjectConfig    = $this->load( $this->Baseroot.'Server.php');           //对象映射
+//            $this->FileReflect      = $_ObjectConfig['FileReflect'];         //配置文件映射
+//            $this->Providers        = $_ObjectConfig['Providers'];           //对象映射
+//
+//            if(is_array($this->FileReflect)){
+//                foreach($this->FileReflect as $key=>$file){
+//                    $this->ObjectConfig[ucfirst($key)] =  $this->load($this->Baseroot.$file);
+//                }
+//            }
+//        }
+//        return $this;
+//    }
 
-            if(is_array($this->FileReflect)){
-                foreach($this->FileReflect as $key=>$file){
-                    $this->ObjectConfig[ucfirst($key)] =  $this->load($this->Baseroot.$file);
-                }
-            }
-        }
-        return $this;
-    }
-
-    public function Config($key)
-    {
-        return $this->ObjectConfig[ucfirst($key)] ;
-    }
     /*
     * @param string $conf
     * 根据配置获取设定
@@ -80,6 +76,10 @@ class Server
         return self::$_instance;
     }
 
+    public function Config($key)
+    {
+        return $this->ObjectConfig[ucfirst($key)] ;
+    }
 
     /**
      * @return array
@@ -136,61 +136,6 @@ class Server
         return [];
     }
 
-    public function Help2()
-    {
-        header("Content-type: text/html; charset=utf-8");
-        $oblist = print_r($this->obList(),true);
-        $obConfig = print_r($this->ObjectConfig,true);
-        $env = print_r($this->Config('Config')['Env'],true);
-
-        echo "<pre>
-Server Object 简单说明
-
-1 : 创建对象实例
-\$server = Grace\Server\Server::getInstance('../Config/');
-or
-\$server = Grace\Server\Server::getInstance()->ConfigRoot('../Docs/Config/');
-
-2 : 返回配置信息    在Config中定义过的
-\$server = Grace\Server\Server::getInstance()->Config('Db');
-\$server = Grace\Server\Server::getInstance()->Config('Config');
-\$server = Grace\Server\Server::getInstance()->Config('Application');
-var_dump(\$server);
-exit;
-
-3 : 封装
-function server(\$make = null, \$parameters = [])
-{
-    if (is_null(\$make))     return \Grace\Server\Server::getInstance('../Config/');
-    return \Grace\Server\Server::getInstance('../Config/')->make(\$make,\$parameters);
-}
-
-4 : 使用
-\$server = Grace\Server\Server::getInstance()->ConfigRoot('../Config/')->meke('db');
-or
-server('db');
-
-===================================================
-//系统内参数
-
-\$this->Baseroot :
-{$this->Baseroot}
-
-\$this->obList :
-$oblist
-
-\$this->ObjectConfig :
-$obConfig
-
-//获取某个定义的参数
-server('db')->Config('Config')['Env'];
-{$env};
-
-
-
-</pre>";
-        //echo 'Hello Server';
-    }
 
     //=============================================
     //Property Overloading
@@ -205,15 +150,17 @@ server('db')->Config('Config')['Env'];
     private function objectList()
     {
         return [
-            'Server',
-            'Cache',
-            'Cookies',
-            'Db',
-            'Parsedown',
-            'Req',
-            'Smarty',
-            'View',
-            'Xls',
+            'Server'    => 'readme.md',
+            'Base'      => '../Base/readme.md',
+            'Cache'     => '../Cache/readme.md',
+            'Cookies'   => '../Cookies/readme.md',
+            'Db'        => '../Db/readme.md',
+            'Parsedown' => '../Parsedown/readme.md',
+            'Req'       => '../Req/readme.md',
+            'Smarty'    => '../Smarty/readme.md',
+            'View'      => '../View/readme.md',
+            'Wise'       => '../Wise/readme.md',
+            'Xls'       => '../Xls/readme.md',
         ];
     }
 
@@ -231,23 +178,22 @@ server('db')->Config('Config')['Env'];
         //计算左侧菜单
         //<li  class="active"><a href="/index.php?book=01-grace&lm=controller&ar=controller.md"> Controller </a></li>
         $nav = '';
-        foreach($objectList as $value){
-            if($value == $chr){
-                $nav .= "<li  class=\"active\"><a href=\"?chr=$value\"> $value </a></li>";
+        foreach($objectList as $key=> $value){
+            if($key == $chr){
+                $nav .= "<li  class=\"active\"><a href=\"?chr=$key\"> $key </a></li>";
             }else{
-                $nav .= "<li><a href=\"?chr=$value\"> $value </a></li>";
+                $nav .= "<li><a href=\"?chr=$key\"> $key </a></li>";
             }
         }
 
         $nr = '';
-        if(in_array($chr,$objectList)){
-            if($chr != 'Server'){
-                $ob = \Grace\Server\Server::getInstance()->make($chr);
-                //var_dump($ob);
-                $nr  = $ob->helpnr();
-            }else{
-                $nr  = $this->helpnr();
-            }
+        if($objectList[$chr]){
+            //获取内容
+            $file = $objectList[$chr];
+            $nr = (new \Parsedown())->text(file_get_contents(__DIR__.'/'.$file));
+
+        }else{
+            $nr = '';
         }
 
         $html = str_replace('##nav##',$nav,$tpl);
@@ -255,14 +201,6 @@ server('db')->Config('Config')['Env'];
         $html = str_replace('##title##',$title,$html);
         echo $html;
         exit;
-    }
-
-
-
-    //内容
-    public function helpnr()
-    {
-        return (new \Parsedown())->text(file_get_contents(__DIR__."/readme.md"));
     }
 
 

@@ -257,24 +257,6 @@ class Cookies{ // class start
             //do something
       }
 
-      //页面
-      public function help()
-      {
-            //获取显示模板
-            $tpl = \Grace\Base\Help::getpl();
-
-            //获取内容解析
-            $nr = $this->helpnr();
-            $html = str_replace('##nr##',$nr,$tpl);
-            echo $html;
-            exit;
-      }
-
-      //内容
-      public function helpnr()
-      {
-            return (new \Parsedown())->text(file_get_contents(__DIR__."/readme.md"));
-      }
 
 
 
