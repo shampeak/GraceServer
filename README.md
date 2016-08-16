@@ -19,6 +19,9 @@
 - Log                [Grace/Log/Log](src/Log/readme.md)
 
 ## 安装
+
+稳定版本 1.0
+
 ```
     composer require grace/server 1.0
 ```
