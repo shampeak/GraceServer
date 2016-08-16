@@ -20,8 +20,10 @@ return [
 log
 
 
-    ->warn($info)
-    ->info($message)
+```
+->warn($info)
+->info($message)
+```
 notice
 warn
 warning

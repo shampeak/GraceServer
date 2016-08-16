@@ -6,7 +6,7 @@
 无
 
 ### 封装
-
+```
     if (! function_exists('view')) {
         function view($tpl = null, $data = [])
         {
@@ -14,7 +14,7 @@
             $views->display($tpl, $data);
         }
     }
-
+```
 
 ### 示例
 

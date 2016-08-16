@@ -26,22 +26,22 @@ return [
 无
 
 ### API
-
+```
     delete($key)
     get($key)
     has($key)
     set($key, $value, $ttl = null)
     clearCache();
-
+```
 
 ### 示例
-
+```
     $cache = server('cache');
     $cache->set('name',"irones",3600);
     $cache->get('name');
     $cache->has('name');
     $cache->clearCache();
-
+```
 ### 注意
 
 无

@@ -24,7 +24,7 @@ return [
 ```
 
 ### API
-
+```
       public function select_database($dbname){
       }
       public function query($sql, $type = ''){
@@ -49,5 +49,5 @@ return [
       }
       public function close(){
       }
-
+```
 ### 示例

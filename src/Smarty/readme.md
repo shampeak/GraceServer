@@ -8,14 +8,14 @@
 },
 
 ### 封装
-
+```
     if (! function_exists('view')) {
         function view($tpl = null, $data = [])
         {
             server('Smarty')->router(req('Router'))->display($tpl,$data);
         }
     }
-
+```
 
 ### 示例
 

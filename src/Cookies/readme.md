@@ -25,20 +25,20 @@
 + setPrefix 设置前缀
 + setExpire 设置过期时间
 
-
-      public function set($name, $value, $expire=0){
-      }
-      public function get($name){
-      }
-      public function update($name, $value){
-      }
-      public function clear($name){
-      }
-      public function setPrefix($prefix){
-      }
-      public function setExpire($expire){
-      }
-
+```
+public function set($name, $value, $expire=0){
+}
+public function get($name){
+}
+public function update($name, $value){
+}
+public function clear($name){
+}
+public function setPrefix($prefix){
+}
+public function setExpire($expire){
+}
+```
 
 ### 示例
 

@@ -5,7 +5,7 @@
 无
 
 ### 封装
-
+```
     /*
     |------------------------------------------------------
     | 数据流 bus sc dc
@@ -45,7 +45,7 @@
             return Grace\Wise\Wise::getInstance()->channel($channel)->C($args,$key, $value);
         }
     }
-
+```
 
 ### 示例
 
