@@ -5,8 +5,8 @@
 服务层容器
 包括
 
-- 服务容器           Grace/Server
 - 基础类             Grace/Base
+- 服务容器           Grace/Server
 - Cookie类           Grace/Cookies
 - 数据库访问         Grace/Db
 - 请求参数           Grace/Req
@@ -14,35 +14,40 @@
 
 ## 安装
 
-composer require grace/server
+稳定版本 1.0
+
+composer require grace/server 1.0
 OR
 下载打包好的文件[下载](https://github.com/shampeak/GraceServer/archive/master.zip)
 
 ## 使用
 
-- Grace/Server
 - Grace/Base
+
+- Grace/Server
+
 - Grace/Cookies
+
 - Grace/Db
+
 - Grace/Req
+
 - Grace/Wise
+
 - Grace/Cache
 
 ## depends
 
     "erusev/parsedown": "^1.6",     //markdown解析
-    "desarrolla2/cache":  "~2.0",   //缓存
-    "smarty/smarty": "v3.1.30"      //smarty
-    "monolog/monolog": "^1.21",     //
+    "desarrolla2/cache":"~2.0",     //缓存
+    "smarty/smarty":    "v3.1.30"   //smarty
+    "monolog/monolog":  "^1.21",    //日志
 
-请阅读文档 [文档](https://github.com/shampeak/GraceServer/tree/master/docs)
 
 ## 文档
 
-全文档支持站点  [PHPleague](http://doc.phpleague.cn).
-
-- 说明
-- 安装
+[文档](https://github.com/shampeak/GraceServer/tree/master/docs)
+全文档支持站点  PHPleague.
 
 ## 作者
 
