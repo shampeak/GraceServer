@@ -17,26 +17,26 @@
 
 ```
 return [
-    //配置文件
+    //对象配置文件
     'FileReflect'  => [
         'Config'   => 'Config.php',
-        'Application'=>'Application.php',
+        'Application'   => 'Application.php',
         'Smarty'   => 'Smarty.php',
         'Db'       => 'Db.php',
         'Cookies'  => 'Cookies.php',
-        'Adminauth'=> 'Adminauth.php',
-        'Mmcfile'  => 'Mmcfile.php',
-        'Cache'    => 'Cache.php'
+        'View'      => 'View.php',
+        'Cache'     => 'Cache.php'
     ],
-    //访问对象
+    //对象
     'Providers'=>[
-        'Smarty'    => Grace\Smarty\Smarty::class,
         'Req'       => Grace\Req\Req::class,             //
         'View'      => Grace\View\View::class,           //
         'Db'        => Grace\Db\Db::class,
         'Cookies'   => Grace\Cookies\Cookies::class,
-        'Parsedown' => Parsedown::class,
-        'Cache'    => Grace\Cache\Cache::class,
+        'Cache'      => Grace\Cache\Cache::class,
+        'Xls'        => Grace\Xls\Xls::class,
+        'Parsedown'  => Grace\Parsedown\Parsedown::class,
+        'Smarty'  => Grace\Smarty\Smarty::class,
     ],
 
 ];
@@ -74,12 +74,37 @@ function server($make = null, $parameters = [])
 
 //返回配置
 
-    $dbconfig   = server()->config('Db');   //返回db配置
+    $dbconfig   = server()->config('Application');   //返回db配置
+
+- 输出结果
+
+    ```
+    Array
+    (
+        [Document] => Application\Application\Document
+        [Data] => Application\Application\Data
+        [Parsedown] => Parsedown
+    )
+    ```
+
 
 //返回容器所有对象信息
 
     $server = server()->obList();       //所有容器对象
 
+- 输出结果
+
+    ```
+    Array
+    (
+        [Smarty] => Grace\Smarty\Smarty
+        [Req] => Grace\Req\Req
+        [View] => Grace\View\View
+        [Db] => Grace\Db\Db
+        [Cookies] => Grace\Cookies\Cookies
+        [Parsedown] => Parsedown
+    )
+    ```
 
 ### 注意
 

@@ -46,13 +46,13 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
+#
 .gitignore.bak
 .svn
 .idea
-wwwroot\PhpMyAdmin
+wwwroot/PhpMyAdmin
 vendor/
 wwwroot/
 Config/
-_Cache/
+Cache/
 

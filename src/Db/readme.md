@@ -27,42 +27,26 @@ return [
 
       public function select_database($dbname){
       }
-
       public function query($sql, $type = ''){
       }
-
       function getOne($sql, $limited = false){
       }
-
       function getRow($sql, $limited = false){
       }
-
       public function getAll($sql,$str=''){
       }
-
       function getMap($sql){
       }
-
       function getCol($sql){
       }
-
-      //===================================================================
-      //只会执行一遍的语法结构,,会把结果缓存起来
-      //再次遇到该类型的话,直接读取缓存,输出 存储位置$retemp
-      //===================================================================
       function gsql($sql,$type='all',$str=''){        //$retemp
       }
-
-      /* 仿真 Adodb 函数 */
       function autoExecute($table, $field_values, $mode = 'INSERT', $where = '', $querymode = ''){
       }
-
       public function version(){
       }
-
       public function insert_id(){
       }
-
       public function close(){
       }
 

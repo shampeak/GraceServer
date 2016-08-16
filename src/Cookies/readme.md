@@ -18,44 +18,26 @@
 
 ### API
 
++ set       设置cookie
++ get       读取cookie
++ update    更新cookie,只更新内容,如需要更新过期时间请使用set方法
++ clear     清除cookie
++ setPrefix 设置前缀
++ setExpire 设置过期时间
+
 
       public function set($name, $value, $expire=0){
       }
-
-      /** 读取cookie
-       * @param String $name  cookie name
-       * @return mixed     cookie value
-       */
       public function get($name){
       }
-
-      /** 更新cookie,只更新内容,如需要更新过期时间请使用set方法
-       * @param String $name  cookie name
-       * @param mixed $value cookie value
-       * @return boolean
-       */
       public function update($name, $value){
       }
-
-      /** 清除cookie
-       * @param String $name  cookie name
-       */
       public function clear($name){
       }
-
-      /** 设置前缀
-       * @param String $prefix cookie prefix
-       */
       public function setPrefix($prefix){
       }
-
-      /** 设置过期时间
-       * @param int $expire cookie expire
-       */
       public function setExpire($expire){
       }
-
-
 
 
 ### 示例

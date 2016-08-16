@@ -165,17 +165,18 @@ class Server
     private function objectList()
     {
         return [
-            'Server' => 'readme.md',
-            'Base' => '../Base/readme.md',
-            'Cache' => '../Cache/readme.md',
-            'Cookies' => '../Cookies/readme.md',
-            'Db' => '../Db/readme.md',
+            'Index'     => 'index.md',
+            'Server'    => 'readme.md',
+            'Base'      => '../Base/readme.md',
+            'Cache'     => '../Cache/readme.md',
+            'Cookies'   => '../Cookies/readme.md',
+            'Db'        => '../Db/readme.md',
             'Parsedown' => '../Parsedown/readme.md',
-            'Req' => '../Req/readme.md',
-            'Smarty' => '../Smarty/readme.md',
-            'View' => '../View/readme.md',
-            'Wise' => '../Wise/readme.md',
-            'Xls' => '../Xls/readme.md',
+            'Req'       => '../Req/readme.md',
+            'Smarty'    => '../Smarty/readme.md',
+            'View'      => '../View/readme.md',
+            'Wise'      => '../Wise/readme.md',
+            'Xls'       => '../Xls/readme.md',
         ];
     }
 
