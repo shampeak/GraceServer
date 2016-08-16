@@ -54,5 +54,5 @@ wwwroot\PhpMyAdmin
 vendor/
 wwwroot/
 Config/
-_
+_Cache/
 
