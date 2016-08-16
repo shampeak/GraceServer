@@ -2,14 +2,19 @@
 
 namespace Grace\Cache;
 
-//use \Desarrolla2\Cache\Adapter\File;
-
-class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
+class Cache implements \Desarrolla2\Cache\CacheInterface
+{ // class start
 
     private $_instance = null;     //缓存实例
     private $_adapter = null;     //$adapter
 
-    public function __construct($config = array()){
+    /**
+     * Cache constructor.
+     *
+     * @param array $config
+     */
+    public function __construct($config = array())
+    {
 
         $this->_Config = $config;
         $this->_adapter = new $config['adapter']($config['cacheDir']);
@@ -18,14 +23,13 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
     }
 
 
-
-
     /**
      * Delete a value from the cache
      *
      * @param string $key
      */
-    public function delete($key){
+    public function delete($key)
+    {
         return $this->_instance->delete($key);
     }
 
@@ -34,7 +38,8 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      *
      * @param string $key
      */
-    public function get($key){
+    public function get($key)
+    {
         return $this->_instance->get($key);
     }
 
@@ -43,7 +48,8 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @return \Desarrolla2\Cache\Adapter\AdapterInterface $adapter
      * @throws Exception
      */
-    public function getAdapter(){
+    public function getAdapter()
+    {
         return $this->_instance->getAdapter();
 
     }
@@ -53,7 +59,8 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      *
      * @param string $key
      */
-    public function has($key){
+    public function has($key)
+    {
         return $this->_instance->has($key);
     }
 
@@ -64,7 +71,8 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param mixed  $value
      * @param int    $ttl
      */
-    public function set($key, $value, $ttl = null){
+    public function set($key, $value, $ttl = null)
+    {
         return $this->_instance->set($key, $value, $ttl);
     }
 
@@ -73,7 +81,8 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      *
      * @param \Desarrolla2\Cache\Adapter\AdapterInterface $adapter
      */
-    public function setAdapter(\Desarrolla2\Cache\Adapter\AdapterInterface $adapter){
+    public function setAdapter(\Desarrolla2\Cache\Adapter\AdapterInterface $adapter)
+    {
         return $this->_instance->setAdapter($adapter);
     }
 
@@ -83,21 +92,24 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
      * @param string $key
      * @param string $value
      */
-    public function setOption($key, $value){
+    public function setOption($key, $value)
+    {
         return $this->_instance->setOption($key, $value);
     }
 
     /**
      * clean all expired records from cache
      */
-    public function clearCache(){
+    public function clearCache()
+    {
         return $this->_instance->clearCache();
     }
 
     /**
      * clear all cache
      */
-    public function dropCache(){
+    public function dropCache()
+    {
         return $this->_instance->dropCache();
     }
 
@@ -105,6 +117,11 @@ class Cache implements \Desarrolla2\Cache\CacheInterface{ // class start
     //Property Overloading
     //=============================================
 
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
     public function __get($key)
     {
         return $this->_instance->$key;

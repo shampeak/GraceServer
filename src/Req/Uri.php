@@ -2,19 +2,16 @@
 
 namespace Grace\Req;
 
-//$res = \Grace\Req\Uri::getInstance()->getpath();
-//$res = \Grace\Req\Uri::getInstance()->getar();
-//print_r($res);
-//exit;
-
 class Uri
 {
 
     private static $environment = null;
     private $path = '';
 
-    /*
-     * Get environment instance (singleton)
+    /**
+     * @param bool $refresh
+     *
+     * @return Uri|null
      */
     public static function getInstance($refresh = false)
     {
@@ -26,19 +23,28 @@ class Uri
 
     //$res = server('req')->path;
 
+    /**
+     * Uri constructor.
+     */
     public function __construct()
     {
         $this->path = \Grace\Req\Environment::getInstance()->all()['path'];
     }
 
+    /**
+     * @return string
+     */
     public function getpath()
     {
         return $this->path;
     }
 
+    /**
+     * @return mixed
+     */
     public function getar()
     {
-        $ar = explode('/',trim($this->path,'/'));
+        $ar = explode('/', trim($this->path, '/'));
         return $ar;
     }
 

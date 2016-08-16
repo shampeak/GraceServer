@@ -4,45 +4,59 @@ namespace Grace\Parsedown;
 
 class Parsedown
 {
-      private $_instance     = null;
-      private $_Config  = null;
+    private $_instance = null;
+    private $_Config = null;
 
-      public function __construct($config = array()){
-            $this->_Config    = $config;
-            $this->_instance = new \Parsedown();
-      }
+    /**
+     * Parsedown constructor.
+     *
+     * @param array $config
+     */
+    public function __construct($config = array())
+    {
+        $this->_Config = $config;
+        $this->_instance = new \Parsedown();
+    }
 
-      function text($text)
-      {
-            return $this->_instance->text($text);
-      }
+    /**
+     * @param $text
+     *
+     * @return string
+     */
+    function text($text)
+    {
+        return $this->_instance->text($text);
+    }
 
-      //=============================================
-      //Property Overloading
-      //=============================================
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->_instance->$key;
+    }
 
-      public function __get($key)
-      {
-            return $this->_instance->$key;
-      }
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function __set($key, $value)
+    {
+        return $this->_instance->$key = $value;
+    }
 
-      public function __set($key, $value)
-      {
-            return $this->_instance->$key = $value;
-      }
-
-
-
-      //=============================================
-      //Property Overloading
-      //=============================================
-
-      //脚手架
-      public function test()
-      {
-            //do something
-      }
-
+    //脚手架
+    /**
+     *
+     */
+    public function test()
+    {
+        //do something
+    }
 
 
 }

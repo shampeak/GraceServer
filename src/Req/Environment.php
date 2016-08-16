@@ -6,19 +6,21 @@ use Grace\Base\Base;
 
 class Environment extends Base
 {
-    /**
-     * @var array
-     */
     protected $properties;
     protected static $environment;
 
+    /**
+     * @return array
+     */
     public function all()
     {
         return $this->properties;
     }
 
-    /*
-     * Get environment instance (singleton)
+    /**
+     * @param bool $refresh
+     *
+     * @return Environment
      */
     public static function getInstance($refresh = false)
     {
@@ -29,8 +31,9 @@ class Environment extends Base
     }
 
     /**
-     * Get mock environment instance
-     * @param  array $userSettings
+     * @param array $userSettings
+     *
+     * @return Environment
      */
     public static function mock($userSettings = array())
     {
@@ -54,6 +57,11 @@ class Environment extends Base
         return self::$environment;
     }
 
+    /**
+     * Environment constructor.
+     *
+     * @param null $settings
+     */
     public function __construct($settings = null)
     {
         $env = array();
@@ -86,11 +94,11 @@ class Environment extends Base
         $this->properties = $env;
     }
 
-    /*
-     * @return string
+    /**
      * 获取地址栏uri信息 http://ap.so/index.php/?sadf&re=adsf
      * -> /index.php/?sadf&re=adsf
      * 分为信息段和query段
+     * @return string
      */
     public static function request_uri()
     {
@@ -107,16 +115,13 @@ class Environment extends Base
         return $uri;
     }
 
-    /*
-    |-------------------------------------------------------------
-    | * 获得完整的pathinfo数据
-    |-------------------------------------------------------------
-    | return array()
-    res[path]
-    res[query]
-    |
-    */
-    public static function pathinfo_query_extend($key = null){
+    /**
+     * @param null $key
+     *
+     * @return string
+     */
+    public static function pathinfo_query_extend($key = null)
+    {
         $pathinfo = @parse_url(SELF::request_uri());
         /*
         /----------------------------------------------------
@@ -127,10 +132,12 @@ class Environment extends Base
         |
         */
         $_path = explode('/', $pathinfo['path']);
-        foreach($_path as $k=>$value){
-            if(empty($value)) unset($_path[$k]);
+        foreach ($_path as $k => $value) {
+            if (empty($value)) {
+                unset($_path[$k]);
+            }
         }
-        $pathinfo['path'] = implode('/',$_path);
+        $pathinfo['path'] = implode('/', $_path);
 
         /*
         /----------------------------------------------------
@@ -142,25 +149,28 @@ class Environment extends Base
         $pq = array();
         $_query = array();
 
-        if(!empty($pathinfo['query']))$_query = explode('&', $pathinfo['query']);
-        foreach($_query as $k=>$value){
+        if (!empty($pathinfo['query'])) {
+            $_query = explode('&', $pathinfo['query']);
+        }
+        foreach ($_query as $k => $value) {
             //存在=号
-            if(strpos($value,'=') !== false) {
+            if (strpos($value, '=') !== false) {
                 $p = explode('=', $value);
                 if (isset($p[0])) {
                     $p[0] = urldecode($p[0]);
                 }
-                if (!empty($p[0]))
+                if (!empty($p[0])) {
                     $pq[] = implode('=', $p);
+                }
             }
         }
         $pathinfo['query'] = implode('&', $pq);
 
         //-返回数据
-        if(empty($key)){
+        if (empty($key)) {
             return $pathinfo;
-        }else{
-            return isset($pathinfo[$key])?$pathinfo[$key]:'';
+        } else {
+            return isset($pathinfo[$key]) ? $pathinfo[$key] : '';
         }
     }
 

@@ -6,7 +6,6 @@ namespace Grace\Server;
 |------------------------------------------------------
 | 在注册表中生成一个类，并且返回
 |------------------------------------------------------
-
 */
 
 class Server
@@ -17,13 +16,13 @@ class Server
     */
     private static $_instance = null;       //单例调用
     //服务对象配置信息存储
-    public $ObjectConfig    = array();          //服务对象配置信息存储
+    public $ObjectConfig = array();          //服务对象配置信息存储
     //服务对象存储
-    public $Providers       = array();             //服务对象存储 映射
+    public $Providers = array();             //服务对象存储 映射
     //对象映射
-    public $FileReflect     = array();           //服务对象存储 映射
+    public $FileReflect = array();           //服务对象存储 映射
     //对象实例
-    public $Instances       = array();             //服务对象存储 实例
+    public $Instances = array();             //服务对象存储 实例
     private $Baseroot = '';
 
 //    public function ConfigRoot($Baseroot)
@@ -43,42 +42,51 @@ class Server
 //        return $this;
 //    }
 
-    /*
-    * @param string $conf
-    * 根据配置获取设定
-    */
-    private function __construct($Baseroot){
-        if(!empty($Baseroot)){
-            $this->Baseroot = $Baseroot?:__DIR__.'/Config/';
-            $_ObjectConfig    = $this->load($this->Baseroot.'Server.php');           //对象映射
-            $this->FileReflect      = $_ObjectConfig['FileReflect'];         //配置文件映射
-            $this->Providers        = $_ObjectConfig['Providers'];           //对象映射
+    /**
+     * Server constructor.
+     *
+     * @param $Baseroot
+     */
+    private function __construct($Baseroot)
+    {
+        if (!empty($Baseroot)) {
+            $this->Baseroot = $Baseroot ?: __DIR__ . '/Config/';
+            $_ObjectConfig = $this->load($this->Baseroot . 'Server.php');           //对象映射
+            $this->FileReflect = $_ObjectConfig['FileReflect'];         //配置文件映射
+            $this->Providers = $_ObjectConfig['Providers'];           //对象映射
 
-            if(is_array($this->FileReflect)){
-                foreach($this->FileReflect as $key=>$file){
-                    $this->ObjectConfig[ucfirst($key)] =  $this->load($this->Baseroot.$file);
+            if (is_array($this->FileReflect)) {
+                foreach ($this->FileReflect as $key => $file) {
+                    $this->ObjectConfig[ucfirst($key)] = $this->load($this->Baseroot . $file);
                 }
             }
+        }else{
+            $this->Baseroot = $Baseroot;
         }
     }
 
 
-
-    /*
-    |------------------------------------------------------------
-    | 单例调用
-    |------------------------------------------------------------
-    */
-    public static function getInstance($Baseroot = ''){
-        if(!(self::$_instance instanceof self)){
+    /**
+     * @param string $Baseroot
+     *
+     * @return Server|null
+     */
+    public static function getInstance($Baseroot = '')
+    {
+        if (!(self::$_instance instanceof self)) {
             self::$_instance = new self($Baseroot);
         }
         return self::$_instance;
     }
 
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
     public function Config($key)
     {
-        return $this->ObjectConfig[ucfirst($key)] ;
+        return $this->ObjectConfig[ucfirst($key)];
     }
 
     /**
@@ -90,12 +98,13 @@ class Server
         return $this->Providers;
     }
 
-    /*
-    |------------------------------------------------------------
-    | 对象调用
-    |------------------------------------------------------------
-    */
-    public function make($abstract,$parameters=[])
+    /**
+     * @param       $abstract
+     * @param array $parameters
+     *
+     * @return mixed|null
+     */
+    public function make($abstract, $parameters = [])
     {
         $abstract = ucfirst($abstract);
         if (isset($this->Instances[$abstract])) {
@@ -106,15 +115,15 @@ class Server
             return null;
         }
         // echo $abstract;
-        $parameters = $parameters?:isset($this->ObjectConfig[$abstract])?$this->ObjectConfig[$abstract]:[];
-        $this->Instances[$abstract] = $this->build($abstract,$parameters);
+        $parameters = $parameters ?: isset($this->ObjectConfig[$abstract]) ? $this->ObjectConfig[$abstract] : [];
+        $this->Instances[$abstract] = $this->build($abstract, $parameters);
         return $this->Instances[$abstract];
     }
 
-    /**    //禁止外部调用
+    /**
      * @param       $abstract
      * @param array $parameters
-     * 实例化
+     *
      * @return mixed
      */
     private function build($abstract, $parameters = [])
@@ -126,11 +135,12 @@ class Server
 
     /**
      * @param string $file
-     * 载入配置文件
+     *
      * @return array|mixed
      */
-    public function load($file=''){
-        if(file_exists($file)){
+    public function load($file = '')
+    {
+        if (file_exists($file)) {
             return include $file;
         }
         return [];
@@ -141,30 +151,37 @@ class Server
     //Property Overloading
     //=============================================
 
-    //脚手架
+    /**
+     *
+     */
     public function test()
     {
         //do something
     }
 
+    /**
+     * @return array
+     */
     private function objectList()
     {
         return [
-            'Server'    => 'readme.md',
-            'Base'      => '../Base/readme.md',
-            'Cache'     => '../Cache/readme.md',
-            'Cookies'   => '../Cookies/readme.md',
-            'Db'        => '../Db/readme.md',
+            'Server' => 'readme.md',
+            'Base' => '../Base/readme.md',
+            'Cache' => '../Cache/readme.md',
+            'Cookies' => '../Cookies/readme.md',
+            'Db' => '../Db/readme.md',
             'Parsedown' => '../Parsedown/readme.md',
-            'Req'       => '../Req/readme.md',
-            'Smarty'    => '../Smarty/readme.md',
-            'View'      => '../View/readme.md',
-            'Wise'       => '../Wise/readme.md',
-            'Xls'       => '../Xls/readme.md',
+            'Req' => '../Req/readme.md',
+            'Smarty' => '../Smarty/readme.md',
+            'View' => '../View/readme.md',
+            'Wise' => '../Wise/readme.md',
+            'Xls' => '../Xls/readme.md',
         ];
     }
 
-    //页面
+    /**
+     * 调用 server()->help();
+     */
     public function help()
     {
         //获取显示模板
@@ -178,32 +195,30 @@ class Server
         //计算左侧菜单
         //<li  class="active"><a href="/index.php?book=01-grace&lm=controller&ar=controller.md"> Controller </a></li>
         $nav = '';
-        foreach($objectList as $key=> $value){
-            if($key == $chr){
+        foreach ($objectList as $key => $value) {
+            if ($key == $chr) {
                 $nav .= "<li  class=\"active\"><a href=\"?chr=$key\"> $key </a></li>";
-            }else{
+            } else {
                 $nav .= "<li><a href=\"?chr=$key\"> $key </a></li>";
             }
         }
 
         $nr = '';
-        if($objectList[$chr]){
+        if ($objectList[$chr]) {
             //获取内容
             $file = $objectList[$chr];
-            $nr = (new \Parsedown())->text(file_get_contents(__DIR__.'/'.$file));
+            $nr = (new \Parsedown())->text(file_get_contents(__DIR__ . '/' . $file));
 
-        }else{
+        } else {
             $nr = '';
         }
 
-        $html = str_replace('##nav##',$nav,$tpl);
-        $html = str_replace('##nr##',$nr,$html);
-        $html = str_replace('##title##',$title,$html);
+        $html = str_replace('##nav##', $nav, $tpl);
+        $html = str_replace('##nr##', $nr, $html);
+        $html = str_replace('##title##', $title, $html);
         echo $html;
         exit;
     }
-
-
 
 
 }
