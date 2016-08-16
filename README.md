@@ -23,7 +23,7 @@
 稳定版本 1.0
 
 ```
-    composer require grace/server 1.0
+    composer require grace/server 1.0.x-dev
 ```
 
 OR
