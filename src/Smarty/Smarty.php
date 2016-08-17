@@ -5,6 +5,8 @@ namespace Grace\Smarty;
 /*
 * 视图类
 */
+@require_once 'Smarty_plus.php';
+
 class Smarty
 {
 
