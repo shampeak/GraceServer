@@ -34,6 +34,9 @@ class Req extends Base
             case 'path':            //env 元数据
                 return \Grace\Req\Environment::getInstance()->all()['path'];
                 break;
+            case 'ads':            //env 元数据
+                return \Grace\Req\Environment::getInstance()->all()['ads'];
+                break;
             case 'query':           //env 元数据
                 return \Grace\Req\Environment::getInstance()->all()['query'];
                 break;
