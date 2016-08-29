@@ -37,6 +37,24 @@ class Smarty
 
     }
 
+
+    public function ads($ads = '')
+    {
+        if(empty($ads)) $ads = req('Ads');
+        if(empty($ads)) return $this;
+        $ar = explode('/',$ads);
+        $package = ucfirst($ar[0]);
+        $controller = $ar[1]?ucfirst($ar[1]):'Home';
+        $mothed = $ar[2]?ucfirst($ar[2]):'Index';
+
+        $path   = APPROOT.'/../Ads/'.$package.'/Views/';
+        $router = [
+            'controller'=>$controller,
+            'mothed'    =>$mothed,
+        ];
+        return $this->path($path)->router($router);
+    }
+
     /**
      * @param string $path
      *
@@ -75,6 +93,11 @@ class Smarty
      */
     public function fetch($tpl = '', $data = array())
     {
+
+        $this->assign([
+            'Adsbase'=>req('Adsbase')
+        ]);
+
         if ($data) {
             $this->assign($data);
         }
@@ -115,8 +138,8 @@ class Smarty
         $_tplFile2 = $this->_controller . '/' . $tplFile2 . '.tpl';
         $_tplFile1 = $this->_controller . '/' . $tplFile1 . '.tpl';
 
-
         if (file_exists($this->root . $_tplFile2)) {
+
             $tplFile = $_tplFile2;
             $this->_sty->display($tplFile);
         } elseif (file_exists($this->root . $_tplFile1)) {
