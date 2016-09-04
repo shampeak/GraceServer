@@ -359,7 +359,7 @@ class Db extends Base
             $sets = array();
             foreach ($field_names AS $value) {
                 if (array_key_exists($value, $field_values) == true) {
-                    $sets[] = $value . " = '" . $field_values[$value] . "'";
+                    $sets[] = '`' . $value . '`' . " = '" . $field_values[$value] . "'";
                 }
             }
             if (!empty($sets)) {
