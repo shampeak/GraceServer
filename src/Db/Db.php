@@ -169,7 +169,6 @@ class Db extends Base
             $this->error_message[]['errno'] = mysql_errno($this->link_id);
             $this->ErrorMsg();
         }
-
         $ET = microtime(true);        //对查询结束时间进行标记
 
         //记录慢查询
@@ -222,7 +221,6 @@ class Db extends Base
             $sql = trim($sql . ' LIMIT 1');
         }
         $vsr = mysql_fetch_assoc($this->query($sql));
-
         return $vsr;
     }
 

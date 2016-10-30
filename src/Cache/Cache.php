@@ -1,6 +1,8 @@
 <?php
 
 namespace Grace\Cache;
+use \Memcache as Backend;
+
 
 class Cache implements \Desarrolla2\Cache\CacheInterface
 { // class start
@@ -15,10 +17,19 @@ class Cache implements \Desarrolla2\Cache\CacheInterface
      */
     public function __construct($config = array())
     {
-
         $this->_Config = $config;
-        $this->_adapter = new $config['adapter']($config['cacheDir']);
-        $this->_adapter->setOption('ttl', $config['ttl']);
+
+        if($config['cacheType'] == 'File'){
+            $this->_adapter = new $config['adapter']($config['cacheDir']);
+            $this->_adapter->setOption('ttl', $config['ttl']);
+        }
+        if($config['cacheType'] == 'Memcache') {
+            $memcache = new \Memcache();
+            foreach( $config['server'] as $_config) {
+                call_user_func_array(array($memcache, 'addServer'), $_config);
+            }
+            $this->_adapter = new $config['adapter']($memcache);
+        }
         $this->_instance = new \Desarrolla2\Cache\Cache($this->_adapter);
     }
 

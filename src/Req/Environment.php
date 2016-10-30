@@ -68,7 +68,6 @@ class Environment extends Base
 
         $env['path'] = $this::pathinfo_query_extend('path');
         $env['query'] = $this::pathinfo_query_extend('query');
-        $env['ads'] = $this::pathinfo_query_extend('ads');
 
         //The HTTP request method
         $env['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'];
@@ -91,6 +90,7 @@ class Environment extends Base
         //Input stream (readable one time only; not available for multipart/form-data requests) post data
         $rawInput = @file_get_contents('php://input');
         $env['input.POST'] = $rawInput ?: '';
+
         $this->properties = $env;
     }
 
@@ -152,12 +152,6 @@ class Environment extends Base
         if (!empty($pathinfo['query'])) {
             $_query = explode('&', $pathinfo['query']);
         }
-
-        //**分析ads参数
-        if($_query[0]){
-            if (strpos($_query[0], '=') === false) {$pathinfo['ads'] = $_query[0];}
-        }
-
         foreach ($_query as $k => $value) {
             //存在=号
             if (strpos($value, '=') !== false) {
@@ -171,6 +165,7 @@ class Environment extends Base
             }
         }
         $pathinfo['query'] = implode('&', $pq);
+
         //-返回数据
         if (empty($key)) {
             return $pathinfo;
