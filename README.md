@@ -23,12 +23,12 @@
 稳定版本 1.0
 
 ```
-    composer require grace/server 1.0.x-dev
+    composer require grace/server dev-gse
 ```
 
 OR
 
-下载打包好的文件[下载](https://github.com/shampeak/GraceServer/archive/master.zip)
+下载打包好的文件[下载](https://github.com/shampeak/GraceServer/archive/gse.zip)
 
 ## 使用
 
